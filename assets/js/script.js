@@ -1,0 +1,6 @@
+var question = document.querySelector('.question')
+var = document.querySelector('')
+var = document.querySelector('')
+var = document.querySelector('')
+var = document.querySelector('')
+var = document.querySelector('')
