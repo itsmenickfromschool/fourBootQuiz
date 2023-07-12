@@ -8,20 +8,27 @@
 </head>
 <body>
     <main>
-        <div class="timerContainer">
+        <div class="featuresContainer">
+            <div class="viewHighScores">
+                <a href="#ViewHighScores">View High Scores</a>
+            </div>
             <div class="timer">
                 <h2>Timer: </h2><span class="countDown"></span>
             </div>
+        </div>
+        
+            
         </div>
         
         <section class="quiz">
             <h1>Javascript Quiz</h1>
             <div class="quizBox">
                 <h2 id="question"> Question Here</h2>
-                <button class="btn">Answer 1</button>
-                <button class="btn">Answer 2</button>
-                <button class="btn">Answer 3</button>
-                <button class="btn">Answer 4</button>
+                <button class="primaryBtn" id="start">Start the quiz!</button>
+                <button class="answerBtn">Answer 1</button>
+                <button class="answerBtn">Answer 2</button>
+                <button class="answerBtn">Answer 3</button>
+                <button class="answerBtn">Answer 4</button>
                 <div class="correctIncorrect"><h2>correctIncorrect</h2></div>
             </div>
             <div class="highScoresLink"><a href="#highScore"></a></div>
