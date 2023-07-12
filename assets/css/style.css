@@ -51,6 +51,23 @@ body {
     background: #221;
     color: #fff;
 }
+
+.startButton {
+
+    background: greenyellow;
+    color: #fff;
+    font-weight: 400;
+    font-size: 18px;
+    width:100%;
+    border-radius:30px;
+    border: 1px solid #221;
+    transition: all .2s;
+    text-align: left;
+    padding: 10px;
+    margin: 10px 5px;
+
+
+}
 .correctIncorrect h2 {
     padding: 5px 5px;
     border-top: 1px dashed #221;;
@@ -85,7 +102,7 @@ body {
 }
 
 .countDown {
-    ""
+    
 }
 
 

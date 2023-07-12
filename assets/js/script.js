@@ -9,12 +9,15 @@ console.log(quizBtn);
 
 /* I have this following bit of code so far for JS. 
 So far I need to get it to work on the load event instead.. Also need to make a new button.*/
-document.addEventListener('click', function() {
+window.addEventListener('load', function() {
     for (var i = 0; i < quizBtn.length; i++) {
         console.log(i);
         quizBtn[i].setAttribute("style", "display: none;");
     }
-    document.quizBox.appendChild('<btn id="startButton">Start</btn>');
+    var startButton = document.createElement('btn');
+    startButton.setAttribute('class','.startButton');
+    quizBox.appendChild(startButton);
+
    
 });
 
