@@ -40,8 +40,8 @@ body {
     font-weight: 400;
     font-size: 18px;
     width:100%;
-    border-radius:7px
-    border 1px solid #221;
+    border-radius:30px;
+    border: 1px solid #221;
     transition: all .2s;
     text-align: left;
     padding: 10px;
@@ -56,10 +56,38 @@ body {
     border-top: 1px dashed #221;;
 
 }
+.timerContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}   
 
 .timer{
-
+  
+    width: 15%;
+    background-color: #221;
+    border:3px solid #fff;
+    margin: 5px 5px;
+    padding: 5px 5px;
+    padding-left: 10px;
+    text-align: left;
+    border-radius: 50px;
+    color: #fff;
+    display: flex;
 }
+
+.timer h2 {
+    justify-self: flex-start;
+    width: 40%;
+    font-size:10px;
+
+    font-weight:300px;
+}
+
+.countDown {
+    
+}
+
 
 .quizBox{
 
