@@ -6,6 +6,8 @@ var startButton = document.querySelector('#start');
 var correctIncorrect = document.querySelector('.correctIncorrect');
 var question = document.querySelector('#question')
 var startingText = 'Hello! This is a Javascript Quiz, press start to begin! You have 60 seconds. If you get a question incorrect you will have 5 seconds removed from the timer.. Good luck!'
+var countDown = document.querySelector('.countDown')
+var secondsLeft = 60;
 const question1 = {
     question: 'question',
     answer1: 'string',
@@ -92,8 +94,25 @@ startButton.addEventListener('click', function(){
         quizBtn[i].setAttribute("style", "display: flex")};
     var questionUsed = Math.floor(Math.random() * questionArray.length);
     console.log(questionUsed);
+    
 
 });
+
+var timer = startButton.addEventListener('click', setInterval(function(){
+    secondsLeft--;
+    countDown.textContent = secondsLeft;
+
+    if (secondsLeft === 0){
+        clearInterval(timer);
+    }
+}, 1000));
+
+
+
+
+// const newQuestion = function() {
+
+// }
 
 
 
