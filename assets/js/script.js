@@ -81,6 +81,8 @@ const question7 = {
 
 var questionArray = [question1,question2,question3,question4,question5,question6,question7];
 
+var questionUsed = Math.floor(Math.random() * questionArray.length);
+
 function startQuiz(){
     //create safety call if the arr is underfined OR length is < 0 OR is secondsLeft < 0 then end quiz function else {}
     // 1. already accomplished just have to fill in the text
@@ -125,8 +127,9 @@ window.addEventListener('load', function() {
 startButton.addEventListener('click', function(){
     startButton.setAttribute('style', 'display: none;');
     timer();
-    startQuiz();
     showQuiz();
+    startQuiz();
+    
     
 
 });
@@ -134,7 +137,7 @@ startButton.addEventListener('click', function(){
 function checkAnswer(){
     //run the function called chek Answer where you pass in the questionUsed Number
     //if else statement if (user clickedvalue == questionArray[questionUsed].correct){increase point, pop out the usedQuestion item in Arr and call start Quiz again}
-    document.querySelector(".btn").addEventListener('click', function(){
+    document.querySelector(".answerBtn").addEventListener('click', function(){
         clickedValue = EventTarget.textContent;
     });
     if (clickedValue = questionArray[questionUsed].correct){
@@ -164,7 +167,7 @@ function timer(){setInterval(function(){
     secondsLeft--;
     countDown.textContent = secondsLeft;
 
-    if (secondsLeft === 0){
+    if (secondsLeft < 0){
         clearInterval(timer);
         endQuiz();
     }
