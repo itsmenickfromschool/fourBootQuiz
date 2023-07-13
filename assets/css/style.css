@@ -82,11 +82,11 @@ body {
 .featuresContainer{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }   
 
 
 .timer{
-    justify-self: flex-end;
     width: 15%;
     background-color: #221;
     border:3px solid #fff;
@@ -108,7 +108,6 @@ body {
 }
 
 .viewHighScores {
-    justify-self: flex-start;
     width: 15%;
     background-color: #221;
     border:3px solid #fff;
@@ -120,13 +119,19 @@ body {
     color: #fff;
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    flex-wrap: ;
 }
 
 .viewHighScores a {
     color:#fff;
     text-decoration: none;
-    justify-self: center;
+    align-self: center;
     width: 40%;
     font-size:10px;
     font-weight:300px;
+}
+
+#question h2 {
+    color: #221;
 }
