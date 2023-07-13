@@ -100,6 +100,16 @@ function startQuiz(){
     checkAnswer();
     
 }}
+function hideQuiz(){
+    for (var i = 0; i < quizBtn.length; i++) {
+        quizBtn[i].setAttribute("style", "display: none;");
+        
+    }
+};
+function showQuiz(){
+    for (var i = 0; i < quizBtn.length; i++) {
+        quizBtn[i].setAttribute("style", "display: flex")};
+};
 
 //Timer Below!!!
 
@@ -107,10 +117,7 @@ function startQuiz(){
 So far I need to get it to work on the load event instead.. Also need to make a new button.*/
 window.addEventListener('load', function() {
     question.textContent = startingText;
-    for (var i = 0; i < quizBtn.length; i++) {
-        quizBtn[i].setAttribute("style", "display: none;");
-        
-    }
+    hideQuiz();
     question.textContent = startingText;
     
 });
@@ -119,8 +126,7 @@ startButton.addEventListener('click', function(){
     startButton.setAttribute('style', 'display: none;');
     timer();
     startQuiz();
-    for (var i = 0; i < quizBtn.length; i++) {
-        quizBtn[i].setAttribute("style", "display: flex")};
+    showQuiz();
     
 
 });
@@ -147,6 +153,8 @@ function checkAnswer(){
 }
 
 function endQuiz(){
+   hideQuiz();
+
 
 }
 //with local storage i take users name from input and put them in local storage
@@ -158,6 +166,7 @@ function timer(){setInterval(function(){
 
     if (secondsLeft === 0){
         clearInterval(timer);
+        endQuiz();
     }
 }, 1000)};
 
