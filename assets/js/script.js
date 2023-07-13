@@ -140,7 +140,7 @@ function checkAnswer(){
     document.querySelector(".answerBtn").addEventListener('click', function(){
         clickedValue = EventTarget.textContent;
     });
-    if (clickedValue === questionArray[questionUsed].correct){
+    if (clickedValue == questionArray[questionUsed].correct.textContent){
         points += 1;
         questionArray = questionArray.splice(questionUsed, 1);
         correctIncorrect.textContent = correct
