@@ -1,5 +1,4 @@
 var countDown = document.querySelector('.countDown');
-var startQuiz = document.querySelector('.startQuiz');
 var quizBtn  = document.querySelectorAll('.answerBtn');
 var quizBox = document.querySelectorAll('.quizBox');
 var startButton = document.querySelector('#start');
