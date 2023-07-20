@@ -13,8 +13,12 @@ var countDown = document.querySelector('.countDown')
 var secondsLeft = 60;
 var clickedValue = ''
 var points = 0
-var correct = 'Correct!'
-var incorrect = 'Incorrect! -2 seconds!'
+var correctMessage = 'Correct!'
+var incorrectMessage = 'Incorrect! -2 seconds!'
+answer1.addEventListener("click",checkAnswer)
+answer2.addEventListener("click",checkAnswer)
+answer3.addEventListener("click",checkAnswer)
+answer4.addEventListener("click",checkAnswer)
 const question1 = {
 
     question: 'question',
@@ -26,7 +30,7 @@ const question1 = {
 };
 
 const question2 = {
-    question: 'question',
+    question: 'question7',
     answer1: 'str1',
     answer2:'str2',
     answer3: 'str3',
@@ -35,7 +39,7 @@ const question2 = {
 };
 
 const question3 = {
-    question: 'question',
+    question: 'question6',
     answer1: 'str1',
     answer2:'str2',
     answer3: 'str3',
@@ -44,7 +48,7 @@ const question3 = {
 };
 
 const question4 = {
-    question: 'question',
+    question: 'question1',
     answer1: 'str1',
     answer2:'str2',
     answer3: 'str3',
@@ -53,7 +57,7 @@ const question4 = {
 };
 
 const question5 = {
-    question: 'question',
+    question: 'question2',
     answer1: 'str1',
     answer2:'str2',
     answer3: 'str3',
@@ -62,7 +66,7 @@ const question5 = {
 };
 
 const question6 = {
-    question: 'question',
+    question: 'question3',
     answer1: 'str1',
     answer2:'str2',
     answer3: 'str3',
@@ -71,7 +75,7 @@ const question6 = {
 };
 
 const question7 = {
-    question: 'question',
+    question: 'question4',
     answer1: 'str1',
     answer2:'str2',
     answer3: 'str3',
@@ -90,16 +94,18 @@ function startQuiz(){
     // I think done? 
     if (questionArray == undefined || questionArray.length === 0 || secondsLeft === 0){
         endQuiz();
+        console.log(points)
     }
     else {
-    var questionUsed = Math.floor(Math.random() * questionArray.length);
+    questionUsed = Math.floor(Math.random() * questionArray.length);
+   // console.log(questionUsed,questionArray)
     question.textContent = (questionArray[questionUsed].question);
     answer1.textContent = (questionArray[questionUsed].answer1);
     answer2.textContent = (questionArray[questionUsed].answer2);
     answer3.textContent = (questionArray[questionUsed].answer3);
     answer4.textContent = (questionArray[questionUsed].answer4);
 
-    checkAnswer();
+    //checkAnswer();
     
 }}
 function hideQuiz(){
@@ -107,11 +113,18 @@ function hideQuiz(){
         quizBtn[i].setAttribute("style", "display: none;");
         
     }
+    correctIncorrect.setAttribute("style", "display: none;");
+    question.setAttribute("style", "display: none");
+
 };
 function showQuiz(){
     for (var i = 0; i < quizBtn.length; i++) {
         quizBtn[i].setAttribute("style", "display: flex")};
+        correctIncorrect.setAttribute("style", "display: flex;");
+        question.setAttribute("style", "display: flex");
 };
+
+
 
 //Timer Below!!!
 
@@ -120,6 +133,7 @@ So far I need to get it to work on the load event instead.. Also need to make a 
 window.addEventListener('load', function() {
     question.textContent = startingText;
     hideQuiz();
+    question.setAttribute("style", "display: flex");
     question.textContent = startingText;
     
 });
@@ -134,22 +148,31 @@ startButton.addEventListener('click', function(){
 
 });
 
-function checkAnswer(){
-    //run the function called chek Answer where you pass in the questionUsed Number
-    //if else statement if (user clickedvalue == questionArray[questionUsed].correct){increase point, pop out the usedQuestion item in Arr and call start Quiz again}
-    document.querySelector(".answerBtn").addEventListener('click', function(){
-        clickedValue = EventTarget.textContent;
-    });
-    if (clickedValue == questionArray[questionUsed].correct.textContent){
+// for (var i = 0; i < quizBtn.length; i++) {
+//     quizBtn[i].addEventListener('click', function(){
+//         clickedValue = Event.target;
+//     });
+
+function checkAnswer(event){
+    // //run the function called chek Answer where you pass in the questionUsed Number
+    // //if else statement if (user clickedvalue == questionArray[questionUsed].correct){increase point, pop out the usedQuestion item in Arr and call start Quiz again}
+    // document.querySelector(".answerBtn").addEventListener('click', function(){
+    //     clickedValue = Event.target;
+    // });
+   // console.log("Evt",event.target.textContent,questionArray[questionUsed])
+    var userAnswer = event.target.textContent
+    if(userAnswer === questionArray[questionUsed].correct){
+
+  
         points += 1;
-        questionArray = questionArray.splice(questionUsed, 1);
-        correctIncorrect.textContent = correct
+       questionArray.splice(questionUsed, 1);
+        correctIncorrect.textContent = correctMessage
         startQuiz();
     } else {
         secondsLeft = secondsLeft - 2;
-        questionArray = questionArray.splice(questionUsed, 1);
+        questionArray.splice(questionUsed, 1);
         // Styling
-        correctIncorrect.textContent = incorrect
+        correctIncorrect.textContent = incorrectMessage
         startQuiz();
        
     }
@@ -171,17 +194,16 @@ function timer(){setInterval(function(){
         clearInterval(timer);
         endQuiz();
     }
-}, 1000)};
+}, 1000)} 
 
 
 
+/*
+var stored = JSON.parse(localStorage.getItemt("codequiz")) || []
+stored.push({
+    user: document.getElementById("user-name").value,
+    score:points+timeleft
+})
 
-// const newQuestion = function() {
-
-// }
-
-
-
-
-
-  
+localStorage.setItem("codequiz",JSON.stringify(stored))
+*/
