@@ -216,5 +216,5 @@ function showUser(){
 
 function showScores(){
     submitForm.setAttribute('style', 'display:none;');
-    highScores.appendChild(JSON.parse(stored));
+    highScores.appendChild(stored);
 }
