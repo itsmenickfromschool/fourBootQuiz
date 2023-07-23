@@ -22,12 +22,14 @@ var submitForm = document.querySelector('#save-user')
 var submitContainer = document.querySelector('.submitContainer')
 var startingText = 'Hello! This is a Javascript Quiz, press start to begin! You have 60 seconds. If you get a question incorrect you will have 5 seconds removed from the timer.. Good luck!'
 var countDown = document.querySelector('.countDown')
-var secondsLeft = 5;
+var secondsLeft = 12;
 var clickedValue = ''
 var points = 0
 var correctMessage = 'Correct!'
 var incorrectMessage = 'Incorrect! -2 seconds!'
 var highScores = document.querySelector('.highScoresPage')
+var stored = [];
+var list = document.querySelector('#list')
 // var stored = JSON.parse(localStorage.getItemt("codequiz")) || []
 answer1.addEventListener("click",checkAnswer);
 answer2.addEventListener("click",checkAnswer);
@@ -191,17 +193,18 @@ function stopTimer(){}
 
 function saveUser(event){
     stored = JSON.parse(localStorage.getItem("codequiz")) || [];
+    console.log(stored);
     stored.push({
         user: document.getElementById("user-name").value,
         score:points+secondsLeft,
     })
     localStorage.setItem("codequiz",JSON.stringify(stored));
     event.preventDefault();
-    hideUser();
     hideQuiz();
     showScores();
+    hideUser();
 }
-var stored = JSON.parse(localStorage.getItem("codequiz")) || [];
+// var stored = JSON.parse(localStorage.getItem("codequiz")) || [];
 
 function hideUser(){
     submitContainer.setAttribute('style', 'display:none;');
@@ -215,6 +218,15 @@ function showUser(){
 }
 
 function showScores(){
+    for (let index = 0; index < stored.length; index++) {
+        const user = stored[index].user;
+        const score = stored[index].score;
+        if (score)
+        var highScore = score
+        const listItem = document.createElement('li');
+        listItem.textContent = user +': '+score;
+        list.append(listItem);
+        
+    }
     submitForm.setAttribute('style', 'display:none;');
-    highScores.appendChild(stored);
 }
