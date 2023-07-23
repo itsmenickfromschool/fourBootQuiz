@@ -1,3 +1,13 @@
+/* 
+To Do: 
+-Finish the display high scores function
+-link the view high scores button to that page
+-End the timer
+-link clear highscores button
+-Style the buttons a little?
+*/
+
+
 var countDown = document.querySelector('.countDown');
 var quizBtn  = document.querySelectorAll('.answerBtn');
 var quizBox = document.querySelectorAll('.quizBox');
@@ -12,7 +22,7 @@ var submitForm = document.querySelector('#save-user')
 var submitContainer = document.querySelector('.submitContainer')
 var startingText = 'Hello! This is a Javascript Quiz, press start to begin! You have 60 seconds. If you get a question incorrect you will have 5 seconds removed from the timer.. Good luck!'
 var countDown = document.querySelector('.countDown')
-var secondsLeft = 60;
+var secondsLeft = 5;
 var clickedValue = ''
 var points = 0
 var correctMessage = 'Correct!'
@@ -130,12 +140,6 @@ function showQuiz(){
         correctIncorrect.textContent = ''
 };
 
-
-
-//Timer Below!!!
-
-/* I have this following bit of code so far for JS. 
-So far I need to get it to work on the load event instead.. Also need to make a new button.*/
 window.addEventListener('load', function() {
     question.textContent = startingText;
     hideQuiz();
@@ -150,27 +154,11 @@ startButton.addEventListener('click', function(){
     clock();
     showQuiz();
     startQuiz();
-    
-    
-
 });
 
-// for (var i = 0; i < quizBtn.length; i++) {
-//     quizBtn[i].addEventListener('click', function(){
-//         clickedValue = Event.target;
-//     });
-
 function checkAnswer(event){
-    // //run the function called chek Answer where you pass in the questionUsed Number
-    // //if else statement if (user clickedvalue == questionArray[questionUsed].correct){increase point, pop out the usedQuestion item in Arr and call start Quiz again}
-    // document.querySelector(".answerBtn").addEventListener('click', function(){
-    //     clickedValue = Event.target;
-    // });
-   // console.log("Evt",event.target.textContent,questionArray[questionUsed])
     var userAnswer = event.target.textContent
     if(userAnswer === questionArray[questionUsed].correct){
-
-  
         points += 1;
        questionArray.splice(questionUsed, 1);
         correctIncorrect.textContent = correctMessage
@@ -181,46 +169,39 @@ function checkAnswer(event){
         // Styling
         correctIncorrect.textContent = incorrectMessage
         startQuiz();
-       
     }
 }
-
-
 
 function endQuiz(){
    hideQuiz();
    showUser();
    highScores.setAttribute("style", 'display: flex;');
- 
-
-
 }
-//with local storage i take users name from input and put them in local storage
-//on highscores page i pull from user input and put it in a list on the page
 
 var clock = function timer(){setInterval(function(){
     secondsLeft--;
     countDown.textContent = secondsLeft;
-    
-
     if (secondsLeft < 0){
         clearInterval(clock);
         endQuiz();
     }
 }, 1000)} 
+
 function stopTimer(){}
 
 function saveUser(event){
-    var stored = JSON.parse(localStorage.getItem("codequiz")) || [];
+    stored = JSON.parse(localStorage.getItem("codequiz")) || [];
     stored.push({
         user: document.getElementById("user-name").value,
         score:points+secondsLeft,
     })
     localStorage.setItem("codequiz",JSON.stringify(stored));
-    preventdefault();
+    event.preventDefault();
     hideUser();
     hideQuiz();
+    showScores();
 }
+var stored = JSON.parse(localStorage.getItem("codequiz")) || [];
 
 function hideUser(){
     submitContainer.setAttribute('style', 'display:none;');
@@ -233,15 +214,7 @@ function showUser(){
     submitForm.setAttribute('style', 'display: flex;');
 }
 
-
-
-
-/*
-var stored = JSON.parse(localStorage.getItemt("codequiz")) || []
-stored.push({
-    user: document.getElementById("user-name").value,
-    score:points+timeleft
-})
-
-localStorage.setItem("codequiz",JSON.stringify(stored))
-*/
+function showScores(){
+    submitForm.setAttribute('style', 'display:none;');
+    highScores.appendChild(JSON.parse(stored));
+}
