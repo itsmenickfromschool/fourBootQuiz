@@ -32,25 +32,26 @@
                 <div class="correctIncorrect"><h2>correctIncorrect</h2></div>
             </div>
             <div class="highScoresLink"><a href="#highScore"></a></div>
-        </section>
-        <section class="Over">
             <div class="submitContainer">
-                <div class="score"></div>
-                <div class="initials"></div>
-                <form>
+                
+                <form id="form">
                     <label>Enter User Name</label>
                     <input type="text" id="user-name"/>
                     <button class="submit" id="save-user">Save User</button>
-                </form>
+                </form><span>   </span>
+
+                <section class="highScoresPage" id="highScore">
+                    <ol>
+                    </ol>
+                    <button class="startOver"><a href="./index.html">Try Again!</a></button>
+                    <button class="clearHighscores">Clear High Scores</button>
+                </section>
             </div>
         </section>
-        <section class="highScoresPage" id="highScore">
-            <ol>
-                <li></li>
-            </ol>
-            <button class="goBack"></button>
-            <button class="clearHighscores"></button>
+        <section class="Over">
+           
         </section>
+        
            
           
         

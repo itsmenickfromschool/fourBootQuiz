@@ -8,6 +8,8 @@ var answer1 = document.querySelector('#one');
 var answer2 = document.querySelector('#two');
 var answer3 = document.querySelector('#three');
 var answer4 = document.querySelector('#four');
+var submitForm = document.querySelector('#save-user')
+var submitContainer = document.querySelector('.submitContainer')
 var startingText = 'Hello! This is a Javascript Quiz, press start to begin! You have 60 seconds. If you get a question incorrect you will have 5 seconds removed from the timer.. Good luck!'
 var countDown = document.querySelector('.countDown')
 var secondsLeft = 60;
@@ -15,10 +17,13 @@ var clickedValue = ''
 var points = 0
 var correctMessage = 'Correct!'
 var incorrectMessage = 'Incorrect! -2 seconds!'
-answer1.addEventListener("click",checkAnswer)
-answer2.addEventListener("click",checkAnswer)
-answer3.addEventListener("click",checkAnswer)
-answer4.addEventListener("click",checkAnswer)
+var highScores = document.querySelector('.highScoresPage')
+// var stored = JSON.parse(localStorage.getItemt("codequiz")) || []
+answer1.addEventListener("click",checkAnswer);
+answer2.addEventListener("click",checkAnswer);
+answer3.addEventListener("click",checkAnswer);
+answer4.addEventListener("click",checkAnswer);
+submitForm.addEventListener("click", saveUser);
 const question1 = {
 
     question: 'question',
@@ -122,6 +127,7 @@ function showQuiz(){
         quizBtn[i].setAttribute("style", "display: flex")};
         correctIncorrect.setAttribute("style", "display: flex;");
         question.setAttribute("style", "display: flex");
+        correctIncorrect.textContent = ''
 };
 
 
@@ -133,6 +139,7 @@ So far I need to get it to work on the load event instead.. Also need to make a 
 window.addEventListener('load', function() {
     question.textContent = startingText;
     hideQuiz();
+    hideUser();
     question.setAttribute("style", "display: flex");
     question.textContent = startingText;
     
@@ -140,7 +147,7 @@ window.addEventListener('load', function() {
 
 startButton.addEventListener('click', function(){
     startButton.setAttribute('style', 'display: none;');
-    timer();
+    clock();
     showQuiz();
     startQuiz();
     
@@ -178,23 +185,54 @@ function checkAnswer(event){
     }
 }
 
+
+
 function endQuiz(){
    hideQuiz();
+   showUser();
+   highScores.setAttribute("style", 'display: flex;');
+ 
 
 
 }
 //with local storage i take users name from input and put them in local storage
 //on highscores page i pull from user input and put it in a list on the page
 
-function timer(){setInterval(function(){
+var clock = function timer(){setInterval(function(){
     secondsLeft--;
     countDown.textContent = secondsLeft;
+    
 
     if (secondsLeft < 0){
-        clearInterval(timer);
+        clearInterval(clock);
         endQuiz();
     }
 }, 1000)} 
+function stopTimer(){}
+
+function saveUser(event){
+    var stored = JSON.parse(localStorage.getItem("codequiz")) || [];
+    stored.push({
+        user: document.getElementById("user-name").value,
+        score:points+secondsLeft,
+    })
+    localStorage.setItem("codequiz",JSON.stringify(stored));
+    preventdefault();
+    hideUser();
+    hideQuiz();
+}
+
+function hideUser(){
+    submitContainer.setAttribute('style', 'display:none;');
+    submitForm.setAttribute('style', 'display:none;');
+    highScores.setAttribute("style", 'display: none;');
+}
+
+function showUser(){
+    submitContainer.setAttribute('style', 'display: flex;');
+    submitForm.setAttribute('style', 'display: flex;');
+}
+
 
 
 
